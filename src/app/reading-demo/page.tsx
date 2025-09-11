@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import Header from '@/components/Header';
+import Header from '@/components/FixedHeader';
 import Footer from '@/components/Footer';
 import QuickSettings from '@/components/QuickSettings';
 import { ArrowLeft, BookOpen, Eye, Type, Palette } from 'lucide-react';

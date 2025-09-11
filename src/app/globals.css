@@ -50,7 +50,7 @@
     --card-foreground: #E2E8F0;
     --popover: #1A202C;
     --popover-foreground: #E2E8F0;
-    --primary: #7C3AED;
+    --primary: #9f78e3;
     --primary-foreground: #F7FAFC;
     --secondary: #2D3748;
     --secondary-foreground: #E2E8F0;
@@ -62,10 +62,10 @@
     --destructive-foreground: #F7FAFC;
     --border: #4A5568;
     --input: #2D3748;
-    --ring: #7C3AED;
+    --ring: #9f78e3;
     
     /* Modern gradient colors for dark theme */
-    --gradient-primary: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
+    --gradient-primary: linear-gradient(135deg, #9f78e3 0%, #A855F7 100%);
     --gradient-secondary: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
     --gradient-card: linear-gradient(145deg, #1A202C 0%, #2D3748 100%);
     
@@ -86,12 +86,18 @@
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
+  
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   
   body {
     background: var(--gradient-secondary);
-    color: hsl(var(--foreground));
+    color: var(--foreground);
     font-family: var(--font-noto-sans-thai), var(--font-geist-sans), "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: var(--global-font-size, 16px);
     line-height: 1.6;
@@ -106,6 +112,10 @@
     /* Modern positioning for layered design */
     position: relative;
     min-height: 100vh;
+    
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    max-width: 100vw;
   }
   
   /* Background overlay for layered effect */
@@ -189,6 +199,42 @@
   transition-timing-function: ease-in-out;
 }
 
+/* Gradient text utilities */
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-primary {
+  --tw-gradient-from: hsl(var(--primary));
+  --tw-gradient-to: hsl(var(--primary) / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-purple-600 {
+  --tw-gradient-to: #9333ea;
+}
+
+.bg-clip-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
+/* Improved backdrop blur */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    background-color: hsl(var(--background) / 0.95);
+  }
+}
+
 /* Custom utilities */
 .line-clamp-2 {
   display: -webkit-box;
@@ -198,24 +244,7 @@
   overflow: hidden;
 }
 
-/* Eye-friendly scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
 
-::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--muted-foreground));
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--foreground) / 0.8);
-}
 
 /* Reduce motion for sensitive users */
 @media (prefers-reduced-motion: reduce) {
@@ -248,8 +277,17 @@ header[class*="bg-background"] {
   min-height: 4rem;
 }
 
+header[class*="bg-white"] {
+  background-color: #ffffff !important;
+  min-height: 4rem;
+}
+
 .dark header[class*="bg-background"] {
   background-color: hsl(var(--background)) !important;
+}
+
+.dark header[class*="bg-gray-900"] {
+  background-color: #111827 !important;
 }
 
 /* Better gradient fallback for older browsers */
@@ -338,7 +376,7 @@ header[class*="bg-background"] {
 .floating-card {
   background: var(--gradient-card);
   border-radius: 20px;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-sm);
   transform: translateY(0);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -349,11 +387,19 @@ header[class*="bg-background"] {
 }
 
 .layered-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
   background: var(--gradient-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: var(--shadow-md);
+  /* Ensure header stays above all content */
+  z-index: 9999;
+  /* Smooth transitions when scrolling */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark .layered-header {
@@ -368,8 +414,8 @@ header[class*="bg-background"] {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: var(--shadow-lg);
-  margin: 2rem 0;
-  padding: 2rem;
+  /* margin: 2rem 0; */
+  /* padding: 2rem; */
 }
 
 .dark .content-section {
@@ -496,27 +542,7 @@ header[class*="bg-background"] {
   }
 }
 
-/* Enhanced scrollbar for modern look */
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #667EEA, #764BA2);
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #5A6FE3, #6A42A0);
-}
 
 /* Animation delays for staggered effects */
 .animation-delay-2000 {
@@ -588,23 +614,204 @@ header[class*="bg-background"] {
     0 0 0 4px rgba(102, 126, 234, 0.2);
 }
 
-/* Better mobile touch targets */
-@media (max-width: 768px) {
+/* Additional Mobile Responsive Styles */
+@media (max-width: 640px) {
+  .content-section {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 16px;
+  }
+  
+  .floating-card {
+    border-radius: 12px;
+  }
+  
+  .floating-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .layered-header {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Optimize for mobile performance */
+    will-change: transform;
+    /* Ensure proper positioning on mobile */
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .glass-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+  }
+  
+  /* Touch-friendly sizing */
   .mobile-touch {
     min-height: 44px;
     min-width: 44px;
   }
+  
+  /* Improved text readability on mobile */
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  h1 {
+    line-height: 1.2;
+  }
+  
+  /* Better spacing for mobile */
+  .stagger-item {
+    margin-bottom: 1rem;
+  }
 }
 
-/* Smooth theme transition improvements */
-html {
-  transition: color-scheme 0.3s ease;
+@media (min-width: 641px) and (max-width: 768px) {
+  .content-section {
+    padding: 1.5rem;
+  }
+  
+  body {
+    font-size: 15px;
+  }
 }
 
-html[data-theme="dark"] {
-  color-scheme: dark;
+@media (min-width: 1024px) {
+  .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-item:nth-child(7) { animation-delay: 0.7s; }
+  .stagger-item:nth-child(8) { animation-delay: 0.8s; }
 }
 
-html[data-theme="light"] {
-  color-scheme: light;
+/* Improved carousel styles for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .floating-card:hover {
+    transform: none;
+  }
+  
+  .floating-card:active {
+    transform: scale(0.98);
+  }
+  
+  .modern-button:hover {
+    transform: none;
+  }
+  
+  .modern-button:active {
+    transform: scale(0.98);
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .glass-card {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+/* Dark mode mobile optimizations */
+@media (max-width: 640px) and (prefers-color-scheme: dark) {
+  .content-section {
+    background: rgba(26, 32, 44, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .glass-card {
+    background: rgba(26, 32, 44, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Responsive header utilities */
+.header-offset {
+  padding-top: 3.5rem; /* 56px - sm header height */
+}
+
+@media (min-width: 640px) {
+  .header-offset {
+    padding-top: 4rem; /* 64px - default header height */
+  }
+}
+
+/* Safe area for mobile devices with notches */
+.header-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Prevent horizontal scrolling on mobile */
+.no-scrollbar-x {
+  overflow-x: hidden;
+}
+
+/* Smooth page transitions */
+.page-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container with safe margins */
+.container-safe {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (min-width: 640px) {
+  .container-safe {
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-safe {
+    padding-left: max(2rem, env(safe-area-inset-left));
+    padding-right: max(2rem, env(safe-area-inset-right));
+  }
+}
+
+/* Fixed Header Styles */
+.fixed-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Ensure content doesn't go under fixed header */
+.main-content {
+  padding-top: 4rem; /* 64px header height */
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 4rem; /* Same height for mobile */
+  }
+}
+
+/* Explicit color utilities for debugging */
+@layer utilities {
+  .text-primary {
+    color: var(--primary) !important;
+  }
+  
+  .bg-primary {
+    background-color: var(--primary) !important;
+  }
+  
+  .border-primary {
+    border-color: var(--primary) !important;
+  }
+  
+  .hover\:text-primary:hover {
+    color: var(--primary) !important;
+  }
 }

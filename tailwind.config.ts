@@ -10,52 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Custom colors for better eye-friendly reading
-        background: {
-          light: '#CCCCCC',
-          dark: '#121212',
-        },
-        foreground: {
-          light: '#333333',
-          dark: '#EEEEEE',
-        },
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
         card: {
-          light: '#FFFFFF',
-          dark: '#1E1E1E',
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
         },
-        border: {
-          light: '#D1D5DB',
-          dark: '#374151',
+        popover: {
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
+        },
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
         },
         muted: {
-          light: '#6B7280',
-          dark: '#9CA3AF',
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
         },
         accent: {
-          light: '#4F46E5',
-          dark: '#6366F1',
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
         },
-        // Eye-friendly reading colors
-        reading: {
-          bg: {
-            light: '#F8F9FA',
-            dark: '#0A0A0A',
-          },
-          text: {
-            primary: {
-              light: '#2D3748',
-              dark: '#E2E8F0',
-            },
-            secondary: {
-              light: '#4A5568',
-              dark: '#CBD5E1',
-            },
-            muted: {
-              light: '#718096',
-              dark: '#94A3B8',
-            }
-          }
-        }
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
       },
       fontFamily: {
         sans: ['var(--font-noto-sans-thai)', 'var(--font-geist-sans)', 'ui-sans-serif', 'system-ui'],
