@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import { Star, Eye, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Import Swiper styles
 import "swiper/css";
@@ -230,9 +231,11 @@ export default function HeroCarousel({
                     <div className="lg:col-span-5 flex justify-center lg:justify-end">
                       <div className="relative group">
                         <div className="absolute -inset-4 bg-gradient-to-r from-primary/50 to-purple-500/50 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity" />
-                        <img
+                        <Image
                           src={item.imageUrl}
                           alt={item.title}
+                          width={288}
+                          height={384}
                           className="relative w-48 lg:w-64 xl:w-72 h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>

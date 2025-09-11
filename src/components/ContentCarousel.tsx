@@ -32,25 +32,14 @@ interface ContentCarouselProps {
 }
 
 export default function ContentCarousel({ 
-  items, 
-  showDesktopGrid = true,
-  itemsPerSlide = { mobile: 2, tablet: 3, desktop: 6 },
+  items,
   autoplay = false,
   autoplayDelay = 3000
 }: ContentCarouselProps) {
-  const [isDesktop, setIsDesktop] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    
-    const updateViewport = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
-    updateViewport();
-    window.addEventListener('resize', updateViewport);
-    return () => window.removeEventListener('resize', updateViewport);
   }, []);
 
   if (!mounted) {

@@ -92,7 +92,7 @@ export default function FixedHeader() {
               {/* Reading Mode Toggle */}
               <button
                 onClick={() => setIsReadingModeOpen(true)}
-                className="cursor-pointer p-2 xl:p-3 rounded-lg xl:rounded-xl text-muted-foreground hover:text-primary transition-all duration-200 hover:backdrop-blur-sm hover:shadow-lg"
+                className="cursor-pointer p-2 xl:p-3 rounded-lg xl:rounded-xl text-muted-foreground hover:text-primary transition-all duration-200 hover:backdrop-blur-sm"
                 aria-label="Reading mode settings"
                 title="การตั้งค่าการอ่าน"
               >
@@ -102,7 +102,7 @@ export default function FixedHeader() {
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="cursor-pointer p-2 xl:p-3 rounded-lg xl:rounded-xl text-muted-foreground hover:text-primary transition-all duration-200 hover:backdrop-blur-sm hover:shadow-lg"
+                className="cursor-pointer p-2 xl:p-3 rounded-lg xl:rounded-xl text-muted-foreground hover:text-primary transition-all duration-200 hover:backdrop-blur-sm"
                 aria-label="Toggle theme"
                 title="เปลี่ยนธีม"
               >

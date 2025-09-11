@@ -1,15 +1,23 @@
-import HeroSection from '@/components/HeroSection';
 import HeroCarousel from '@/components/HeroCarousel';
 import SectionHeader from '@/components/SectionHeader';
-import ContentCard from '@/components/ContentCard';
 import ContentCarousel from '@/components/ContentCarousel';
-import RankingItem from '@/components/RankingItem';
 import Footer from '@/components/Footer';
 import QuickSettings from '@/components/QuickSettings';
-import Link from 'next/link';
+
+// Type definitions
+interface ContentItem {
+  title: string;
+  author: string;
+  genre: string;
+  rating: number;
+  imageUrl: string;
+  isNew?: boolean;
+  views: string;
+  type: 'novel' | 'comic';
+}
 
 // Mock data for demonstration
-const generateMoreContent = (baseItems: any[], count: number) => {
+const generateMoreContent = (baseItems: ContentItem[], count: number): ContentItem[] => {
   const result = [...baseItems];
   while (result.length < count) {
     const randomItem = baseItems[Math.floor(Math.random() * baseItems.length)];
