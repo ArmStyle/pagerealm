@@ -391,11 +391,6 @@
     box-shadow: var(--shadow-sm);
   }
 
-  /* Ensure header content doesn't overflow */
-  .header-content {
-    padding-top: 4rem; /* Height of fixed header */
-  }
-
   /* Navigation hover effects */
   .nav-link {
     display: flex;
