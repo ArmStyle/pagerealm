@@ -23,6 +23,11 @@
     --input: #edf2f7;
     --ring: #667eea;
 
+    /* Tailwind CSS variables for consistency */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-gray-900: #111827;
+
     /* Modern gradient colors */
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-secondary: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
@@ -853,5 +858,20 @@ header[class*="bg-white"] {
 
   .hover\:text-primary:hover {
     color: var(--primary) !important;
+  }
+
+  /* Fix for dark mode text-white issue */
+  .dark .dark\:text-white {
+    color: #ffffff !important;
+  }
+  
+  /* Fix for text-gray-900 specificity */
+  .text-gray-900 {
+    color: #111827 !important;
+  }
+  
+  .dark .dark\:text-white,
+  :is(.dark .dark\:text-white) {
+    color: #ffffff !important;
   }
 }
