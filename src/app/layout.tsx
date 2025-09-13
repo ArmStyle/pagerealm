@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import FixedHeader from "@/components/FixedHeader";
+import ConditionalHeader from "@/components/ConditionalHeader";
+import ConditionalMain from "@/components/ConditionalMain";
 import QuickSettings from "@/components/QuickSettings";
 
 const geistSans = Geist({
@@ -42,9 +43,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <FixedHeader />
+          <ConditionalHeader />
           {/* Main content with padding to account for fixed header */}
-          <main className="pt-16">{children}</main>
+          <ConditionalMain>{children}</ConditionalMain>
           <QuickSettings />
         </ThemeProvider>
       </body>

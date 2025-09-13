@@ -4,7 +4,10 @@ import { Search, Book, BookOpen, Menu, X, Sun, Moon, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import ReadingMode from "./ReadingMode";
+import UserMenu from "./UserMenu";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function FixedHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,9 +15,10 @@ export default function FixedHeader() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+  const { isAuthenticated, user } = useUserStore();
 
   // หน้าที่ไม่ต้องการ header
-  const hideHeaderPages = ["/login", "/register", "/reading-full"];
+  const hideHeaderPages = ["/login", "/register", "/forgot-password", "/verify-otp", "/reading-full"];
 
   useEffect(() => {
     setMounted(true);
@@ -102,9 +106,17 @@ export default function FixedHeader() {
                   )}
                 </button>
 
-                <button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg px-4 py-2 text-sm transition-colors">
-                  เข้าสู่ระบบ
-                </button>
+                {/* User Authentication */}
+                {isAuthenticated && user ? (
+                  <UserMenu />
+                ) : (
+                  <Link
+                    href="/login"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg px-4 py-2 text-sm transition-colors"
+                  >
+                    เข้าสู่ระบบ
+                  </Link>
+                )}
               </div>
             </nav>
 
@@ -175,9 +187,34 @@ export default function FixedHeader() {
                   จัดอันดับ
                 </a>
                 
-                <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg px-4 py-3 mt-4 transition-colors">
-                  เข้าสู่ระบบ
-                </button>
+                {/* Mobile Login Button */}
+                {isAuthenticated && user ? (
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <img
+                        src={user.profile_picture || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.username}`}
+                        alt={user.profile_name}
+                        className="w-10 h-10 rounded-full"
+                      />
+                      <div>
+                        <h3 className="font-semibold text-foreground">
+                          {user.profile_name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground">
+                          @{user.username}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="block w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-lg px-4 py-3 mt-4 transition-colors text-center"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    เข้าสู่ระบบ
+                  </Link>
+                )}
               </div>
             </div>
           )}

@@ -14,14 +14,18 @@
     --popover-foreground: #2d3748;
     --primary: #667eea;
     --primary-foreground: #ffffff;
+    --primary-hover: #5a67d8;
     --secondary: #edf2f7;
     --secondary-foreground: #2d3748;
+    --secondary-hover: #e2e8f0;
     --muted: #f7fafc;
     --muted-foreground: #718096;
+    --muted-hover: #edf2f7;
     --accent: #e6fffa;
     --accent-foreground: #234e52;
     --destructive: #e53e3e;
     --destructive-foreground: #ffffff;
+    --destructive-hover: #c53030;
     --border: #e2e8f0;
     --input: #edf2f7;
     --ring: #667eea;
@@ -49,14 +53,18 @@
     --popover-foreground: #e2e8f0;
     --primary: #9f78e3;
     --primary-foreground: #f7fafc;
+    --primary-hover: #8b5ec8;
     --secondary: #2d3748;
     --secondary-foreground: #e2e8f0;
+    --secondary-hover: #4a5568;
     --muted: #2d3748;
     --muted-foreground: #a0aec0;
+    --muted-hover: #4a5568;
     --accent: #2a4a4f;
     --accent-foreground: #e6fffa;
     --destructive: #e53e3e;
     --destructive-foreground: #f7fafc;
+    --destructive-hover: #c53030;
     --border: #4a5568;
     --input: #2d3748;
     --ring: #9f78e3;
@@ -437,6 +445,182 @@
 
   .search-input::placeholder {
     color: var(--muted-foreground);
+  }
+
+  /* Input component base styling */
+  .input-base {
+    flex: 1;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid var(--input);
+    background: var(--background);
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--foreground);
+    transition: all 0.2s ease;
+  }
+
+  .input-base:focus-visible {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 1px var(--ring);
+  }
+
+  .input-base:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .input-base::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  .input-base[type="file"] {
+    border: 0;
+    background: transparent;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* Input variants */
+  .input-default {
+    border-color: var(--input);
+  }
+
+  .input-default:focus-visible {
+    border-color: var(--ring);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--ring);
+  }
+
+  .input-error {
+    border-color: var(--destructive);
+  }
+
+  .input-error:focus-visible {
+    border-color: var(--destructive);
+    box-shadow: 0 4px 6px -1px rgba(229, 62, 62, 0.2), 0 2px 4px -1px rgba(229, 62, 62, 0.1), 0 0 0 1px var(--destructive);
+  }
+
+  /* Input sizes */
+  .input-sm {
+    height: 2rem;
+  }
+
+  .input-default-size {
+    height: 2.5rem;
+  }
+
+  .input-lg {
+    height: 3rem;
+  }
+
+  /* Button component base styling */
+  .button-base {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .button-base:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--ring);
+  }
+
+  .button-base:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Button variants */
+  .button-default {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .button-default:hover:not(:disabled) {
+    background: var(--primary-hover);
+  }
+
+  .button-destructive {
+    background: var(--destructive);
+    color: var(--destructive-foreground);
+  }
+
+  .button-destructive:hover:not(:disabled) {
+    background: var(--destructive-hover);
+  }
+
+  .button-outline {
+    border: 1px solid var(--border);
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  .button-outline:hover:not(:disabled) {
+    background: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  .button-secondary {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  .button-secondary:hover:not(:disabled) {
+    background: var(--secondary-hover);
+  }
+
+  .button-ghost {
+    background: transparent;
+    color: var(--foreground);
+  }
+
+  .button-ghost:hover:not(:disabled) {
+    background: var(--muted);
+    color: var(--muted-foreground);
+  }
+
+  .button-link {
+    background: transparent;
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .button-link:hover:not(:disabled) {
+    text-decoration: none;
+  }
+
+  /* Button sizes */
+  .button-sm {
+    height: 2rem;
+    border-radius: 0.375rem;
+    padding: 0 0.75rem;
+  }
+
+  .button-default-size {
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .button-lg {
+    height: 3rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 2rem;
+  }
+
+  .button-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    padding: 0;
   }
 
   /* Quick Settings Panel styling */
