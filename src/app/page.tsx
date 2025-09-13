@@ -272,8 +272,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen transition-all duration-300 page-transition no-scrollbar-x">
-      {/* Hero Carousel Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 container-safe">
+      {/* Header offset for fixed header */}
+      <div className="header-content">
+        {/* Hero Carousel Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 container-safe">
         <HeroCarousel 
           items={heroItems}
           autoplay={true}
@@ -441,7 +443,8 @@ export default function Home() {
           </div>
         </section> */}
 
-      <Footer />
+        <Footer />
+      </div>
     </div>
   );
 }
