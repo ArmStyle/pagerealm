@@ -188,6 +188,19 @@
   .toggle-thumb.active {
     transform: translateX(1.25rem);
   }
+
+  /* Toggle switch background colors */
+  .toggle-bg-active {
+    background-color: var(--primary);
+  }
+
+  .toggle-bg-inactive {
+    background-color: var(--border);
+  }
+
+  .dark .toggle-bg-inactive {
+    background-color: #4a5568;
+  }
 }
 
 /* ===========================================

@@ -159,7 +159,7 @@ export default function QuickSettings() {
                   className="sr-only"
                 />
                 <div className={`w-11 h-6 rounded-full transition-colors ${
-                  isEyeComfort ? 'bg-primary' : 'bg-border'
+                  isEyeComfort ? 'toggle-bg-active' : 'toggle-bg-inactive'
                 }`}>
                   <div className={`w-4 h-4 bg-white rounded-full shadow-md transition-transform mt-1 ml-1 ${
                     isEyeComfort ? 'translate-x-5' : ''
