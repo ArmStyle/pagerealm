@@ -26,9 +26,9 @@ export default function SectionHeader({
       {viewAllLink && (
         <a
           href={viewAllLink}
-          className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium text-sm hover:underline transition-colors"
+          className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-bold text-sm hover:underline transition-colors"
         >
-          <span className="flex items-center gap-1">
+          <span className="flex items-center gap-1 ">
             {"ดูทั้งหมด"} <ChevronRight className="w-4 h-4 lg:w-5 lg:h-5" />
           </span>
         </a>

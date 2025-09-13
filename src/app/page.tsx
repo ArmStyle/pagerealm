@@ -2,7 +2,6 @@ import HeroCarousel from '@/components/HeroCarousel';
 import SectionHeader from '@/components/SectionHeader';
 import ContentCarousel from '@/components/ContentCarousel';
 import Footer from '@/components/Footer';
-import QuickSettings from '@/components/QuickSettings';
 
 // Type definitions
 interface ContentItem {
@@ -443,7 +442,6 @@ export default function Home() {
         </section> */}
 
       <Footer />
-      <QuickSettings />
     </div>
   );
 }

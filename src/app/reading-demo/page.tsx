@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/FixedHeader';
 import Footer from '@/components/Footer';
-import QuickSettings from '@/components/QuickSettings';
 import { ArrowLeft, BookOpen, Eye, Type, Palette } from 'lucide-react';
 import Link from 'next/link';
 
@@ -284,7 +283,6 @@ export default function ReadingDemo() {
       </main>
 
       <Footer />
-      <QuickSettings />
     </div>
   );
 }
